@@ -1,0 +1,10 @@
+#include "gripKey.dtsi"
+
+&default_transform {
+    col-offset = <6>;
+};
+
+// wheel
+&encoder {
+    status = "okay";
+};

@@ -1,0 +1,21 @@
+# RIGHT
+if SHIELD_GRIPKEY_R
+
+config ZMK_KEYBOARD_NAME
+    default "gripKey"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+# Split mode
+if SHIELD_GRIPKEY_L || SHIELD_GRIPKEY_R
+
+config ZMK_SPLIT
+    default y
+
+config ZMK_POINTING
+    default y
+
+endif

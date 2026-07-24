@@ -1,0 +1,5 @@
+config SHIELD_GRIPKEY_R
+    def_bool $(shields_list_contains,gripKey_right)
+
+config SHIELD_GRIPKEY_L
+    def_bool $(shields_list_contains,gripKey_left)
