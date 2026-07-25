@@ -3,7 +3,18 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/pointing.h>
+
+// 휠 속도 최적화 - SCRL_VAL와 eh 하단의 tap-ms 곱해서 1250이상 돼야 스크롤 정상작동!
+// SCRL_VAL: 스크롤 거리, tap-ms: 지연속도
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 30 // default:10, 7
+
+// 스크롤 이벤트 빠른반영
+&msc {
+    trigger-period-ms = <8>;    // 기본값 16 (반영주기)
+    time-to-max-speed-ms = <0>; // 기본값300 (최대치도달속도)
+    acceleration-exponent = <0>;
+};
 
 / {
     macros {
@@ -62,6 +73,7 @@
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
+            tap-ms = <45>;
         };
     };
     
@@ -94,7 +106,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         mac_layer { // mac
@@ -117,7 +129,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         num_layer { // 2 left first
@@ -140,7 +152,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         nav_layer { // 3 left last
@@ -163,7 +175,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         spec_layer { // 4 right first
@@ -186,7 +198,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         func_layer { // 5 right last
@@ -209,7 +221,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         mouse1_layer { // 6 onehand_mouse_mode1
@@ -232,7 +244,7 @@
             //                                                                ╰──────────────╯                                     ╰──────────────╯
             >;
             // wheel
-            sensor-bindings = <&inc_dec_kp TAB LS(TAB) &eh SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&eh SCRL_LEFT SCRL_RIGHT &eh SCRL_UP SCRL_DOWN>;
         };
 
         mouse2_layer { // 7 onehand_mouse_mode2

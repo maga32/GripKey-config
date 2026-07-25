@@ -1,6 +1,6 @@
 #include "gripKey.dtsi"
 
 // wheel
-&encoder {
+&left_encoder {
     status = "okay";
 };
